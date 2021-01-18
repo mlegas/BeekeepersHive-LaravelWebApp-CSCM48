@@ -21,12 +21,27 @@ class CommentFactory extends Factory
      */
     public function definition()
     {
+        $commentableType = $this->faker->randomElement([
+            \App\Models\Post::class,
+            \App\Models\ProfilePage::class,
+            ]);
+
+        if ($commentableType === \App\Models\Post::class)
+        {
+            $commentableId = \App\Models\Post::inRandomOrder()->first()->id;
+        }
+
+        else
+        {
+            $commentableId = \App\Models\ProfilePage::inRandomOrder()->first()->id;
+        }
+
         return [
+            'commentable_type' => $commentableType,
+            'commentable_id' => $commentableId,
             'content' => $this->faker->text(100),
-            // Sets the post_id to a random already existing Post.
-            'post_id' => \App\Models\Post::inRandomOrder()->first()->id,
-            // Sets the user_id to a random already existing User.
-            'user_id' => \App\Models\User::inRandomOrder()->first()->id,
+            // Sets the user_id to a random already existing Profile.
+            'profile_id' => \App\Models\Profile::inRandomOrder()->first()->id,
         ];
     }
 }

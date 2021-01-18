@@ -25,8 +25,8 @@ class PostFactory extends Factory
             'topic' => $this->faker->text(30),
             'content' => $this->faker->text(200),
             'views' => $this->faker->numberBetween(0, 1000),
-            // Sets the user_id to a random already existing User.
-            'user_id' => \App\Models\User::inRandomOrder()->first()->id,
+            // Sets the user_id to a random already existing Profile.
+            'profile_id' => \App\Models\Profile::inRandomOrder()->first()->id,
         ];
     }
 }

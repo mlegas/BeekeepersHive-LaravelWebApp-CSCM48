@@ -27,8 +27,8 @@ class Post extends Model
     }
 
     // Creates a one to many relationship with Users.
-    public function user()
+    public function profile()
     {
-        return $this->belongsTo('\App\Models\User');
+        return $this->belongsTo('\App\Models\Profile');
     }
 }

@@ -17,7 +17,6 @@ class CreateProfilesTable extends Migration
         {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
             $table->string('location');
             $table->date('date_of_birth');
             $table->timestamps();

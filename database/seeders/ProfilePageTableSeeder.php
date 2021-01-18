@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\ProfilePage;
 
 class ProfilePageTableSeeder extends Seeder
 {
@@ -13,6 +14,6 @@ class ProfilePageTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        ProfilePage::factory()->count(20)->create();
     }
 }

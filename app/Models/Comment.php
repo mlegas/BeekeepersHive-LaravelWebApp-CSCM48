@@ -18,9 +18,9 @@ class Comment extends Model
         return $this->morphTo();
     }
 
-    // Creates a one to many relationship with Users.
-    public function user()
+    // Creates a one to many relationship with Profiles.
+    public function profile()
     {
-        return $this->belongsTo('\App\Models\User');
+        return $this->belongsTo('\App\Models\Profile');
     }
 }

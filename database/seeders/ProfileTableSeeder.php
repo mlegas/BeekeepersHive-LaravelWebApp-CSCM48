@@ -17,7 +17,6 @@ class ProfileTableSeeder extends Seeder
     {
         $user = new Profile;
         $user->name = 'LaravelMaster';
-        $user->email = 'epicgamer@gmail.com';
         $user->location = 'Warsaw';
         $user->date_of_birth = Carbon::create(1605, 11, 05);
         $user->save();
