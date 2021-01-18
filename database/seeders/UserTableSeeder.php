@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use App\Models\User;
 
 class UserTableSeeder extends Seeder
@@ -14,6 +15,14 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(20)->create();
+        $user = new User;
+        $user->name = 'LaravelMaster';
+        $user->email = 'epicgamer@protonmail.com';
+        $user->email_verified_at = now();
+        $user->password = 'l33tpr0h4x0rl0l';
+        $user->remember_token = Str::random(10);
+        $user->save();
+
+        # Factory in Profile factory.
     }
 }

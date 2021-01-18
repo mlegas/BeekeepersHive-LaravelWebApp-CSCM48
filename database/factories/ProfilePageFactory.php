@@ -22,7 +22,9 @@ class ProfilePageFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'bio' => $this->faker->text(50),
+            'views' => $this->faker->numberBetween(0, 100),
+            'profile_id' => \App\Models\Profile::factory()->create()->id,
         ];
     }
 }

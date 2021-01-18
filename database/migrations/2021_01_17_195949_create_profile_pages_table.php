@@ -18,11 +18,11 @@ class CreateProfilePagesTable extends Migration
             $table->longText('bio');
             $table->bigInteger('views');
 
-            $table->timestamps();
-
             $table->unsignedBigInteger('profile_id');
             $table->foreign('profile_id')->references('id')->on('profiles')
                 ->onDelete('cascade')->onUpdate('cascade');
+
+            $table->timestamps();
         });
     }
 

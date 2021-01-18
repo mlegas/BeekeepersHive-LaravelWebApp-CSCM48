@@ -15,12 +15,13 @@ class ProfileTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = new Profile;
-        $user->name = 'LaravelMaster';
-        $user->location = 'Warsaw';
-        $user->date_of_birth = Carbon::create(1605, 11, 05);
-        $user->save();
+        $profile = new Profile;
+        $profile->name_displayed = 'EliteBeekeeper1337';
+        $profile->location = 'Warsaw';
+        $profile->date_of_birth = Carbon::create(1605, 11, 05);
+        $profile->user_id = 1;
+        $profile->save();
 
-        Profile::factory()->count(5)->create();
+        # Factory in Profile Page factory.
     }
 }

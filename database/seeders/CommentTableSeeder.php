@@ -16,8 +16,9 @@ class CommentTableSeeder extends Seeder
     {
         $comment = new Comment;
         $comment->content = "Also, I just made a comment!";
-        $comment->post_id = 1;
-        $comment->user_id = 1;
+        $comment->commentable_id = 1;
+        $comment->commentable_type = \App\Models\Post::class;
+        $comment->profile_id = 1;
         $comment->save();
 
         Comment::factory()->count(25)->create();

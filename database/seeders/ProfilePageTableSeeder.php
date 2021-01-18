@@ -14,6 +14,12 @@ class ProfilePageTableSeeder extends Seeder
      */
     public function run()
     {
+        $profile_page = new ProfilePage;
+        $profile_page->bio = 'I love beekeeping!';
+        $profile_page->views = '42';
+        $profile_page->profile_id = 1;
+        $profile_page->save();
+
         ProfilePage::factory()->count(20)->create();
     }
 }

@@ -18,11 +18,11 @@ class PostTableSeeder extends Seeder
         $post->topic = 'Seeding in Laravel';
         $post->content = 'Seeding is a wonderful technique. I hope to do it more often!';
         $post->views = 9001;
-        $post->user_id = 1;
+        $post->profile_id = 1;
         $post->save();
 
         Post::factory()->count(50)->create();
-        
+
         $posts = Post::get();
 
         foreach ($posts as $post)

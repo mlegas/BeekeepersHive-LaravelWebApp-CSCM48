@@ -9,8 +9,7 @@ class Profile extends Model
 {
     use HasFactory;
 
-    protected $attributes = ['name' => 'John Doe',
-                            'email' => 'johndoe@johndoe.com',
+    protected $attributes = ['name_displayed' => 'John Doe',
                             'location' => 'Nowhere',];
 
     public function user()
