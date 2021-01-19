@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+
+Route::get('register-step2', [App\Http\Controllers\Auth\RegisterStep2Controller::class, 'showForm'])->middleware('auth');
+Route::post('register-step2', [App\Http\Controllers\Auth\RegisterStep2Controller::class, 'postForm'])->name('register.step2');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
