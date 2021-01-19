@@ -15,7 +15,7 @@ class CreateProfilePagesTable extends Migration
     {
         Schema::create('profile_pages', function (Blueprint $table) {
             $table->id();
-            $table->longText('bio')->nullable();
+            $table->longText('biography')->nullable();
             $table->bigInteger('views');
 
             $table->unsignedBigInteger('profile_id');

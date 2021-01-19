@@ -24,7 +24,6 @@ class ProfileFactory extends Factory
         return [
             'name_displayed' => $this->faker->name(),
             'location' => $this->faker->city(),
-            'date_of_birth' => $this->faker->date(),
             'user_id' => \App\Models\User::factory()->create()->id,
         ];
     }

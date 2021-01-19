@@ -17,8 +17,8 @@ class CreateProfilesTable extends Migration
         {
             $table->id();
             $table->string('name_displayed');
-            $table->string('location');
-            $table->date('date_of_birth');
+            $table->string('location')->nullable();
+            $table->string('avatar')->nullable();
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')
