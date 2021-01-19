@@ -9,7 +9,8 @@ class Profile extends Model
 {
     use HasFactory;
 
-    protected $attributes = ['name_displayed' => 'John Doe',
+    protected $attributes = ['avatar' => 'avatars/defaultAvatar.jpg',
+                            'name_displayed' => 'John Doe',
                             'location' => 'Nowhere',];
 
     public function user()
