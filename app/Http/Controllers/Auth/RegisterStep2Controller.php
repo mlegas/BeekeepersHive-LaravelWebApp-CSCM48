@@ -44,7 +44,7 @@ class RegisterStep2Controller extends Controller
             $profile->avatar = 'avatars/defaultAvatar.jpg';
         }
 
-        if ($request->has('biography') && !empty($request->input('biography')))
+        if ($request->has('biography') && $request->input('biography')->isNotEmpty())
         {
             $profile->biography = $request->biography;
         }
@@ -54,7 +54,7 @@ class RegisterStep2Controller extends Controller
             $profile->location = '...';
         }
 
-        if ($request->has('location') && !empty($request->input('location')))
+        if ($request->has('location') && $request->input('location')->isNotEmpty())
         {
             $profile->location = $request->location;
         }
@@ -64,7 +64,7 @@ class RegisterStep2Controller extends Controller
             $profile->location = '...';
         }
 
-        if ($request->has('name_displayed') && !empty($request->input('name_displayed')))
+        if ($request->has('name_displayed') && $request->input('name_displayed')->isNotEmpty())
         {
             $profile->name_displayed = $request->name_displayed;
         }

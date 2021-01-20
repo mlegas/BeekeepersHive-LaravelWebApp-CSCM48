@@ -20,12 +20,42 @@
         </div>
         @if ($posts->count())
             @foreach ($posts as $post)
-                <div>
-                    {{ $post->profile->name_displayed }} {{ $post->created_at }} {{ $post->topic }} {{ $post->content }} <img src="{{ '/storage/'. $post->profile->avatar }}"/>
+                <div class="col-md-8 pt-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <strong>Topic: {{ $post->topic }}</strong>
+                            </div>
+                            <div>
+                                <strong>Posted at: {{ $post->created_at }}</strong>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p>Author: {{ $post->profile->name_displayed }} </p>
+                                    <img class="img-fluid rounded w-50" src="{{ 'storage/'. $post->profile->avatar }}"/>
+                                </div>
+                                <div class="col-md-8">
+                                    <p> {{ $post->content }} </p>
+
+                                    @if ($post->tags()->get()->isNotEmpty())
+                                        Tags:
+                                        @foreach ($post->tags()->get() as $tag)
+                                            {{ $tag->name }}
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             @endforeach
         @else
-        <p> There are no posts </p>
+        <p> No posts have been found! Something has gone terribly wrong in the world. </p>
         @endif
     </div>
 </div>
