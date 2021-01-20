@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->middleware('profile.completed');
+Route::get('/', [App\Http\Controllers\IndexController::class, 'index']);
 
 Auth::routes(['verify' => true]);
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');

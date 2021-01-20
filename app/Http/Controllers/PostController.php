@@ -59,8 +59,11 @@ class PostController extends Controller
                     'name' => $tagName
                 ]);
 
-                $tag->post_id = $post->id;
-                $tagIds[] = $tag->id;
+                if ($tag)
+                {
+                    $tag->post_id = $post->id;
+                    $tagIds[] = $tag->id;
+                }
             }
             $post->tags()->sync($tagIds);
         }
