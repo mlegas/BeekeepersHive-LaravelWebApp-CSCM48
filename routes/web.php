@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Auth::routes(['verify' => true]);
+Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
 
 Route::get('register-step2', [App\Http\Controllers\Auth\RegisterStep2Controller::class, 'index']);
 Route::post('register-step2', [App\Http\Controllers\Auth\RegisterStep2Controller::class, 'store'])->name('register.step2');

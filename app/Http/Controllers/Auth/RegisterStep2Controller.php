@@ -23,18 +23,15 @@ class RegisterStep2Controller extends Controller
             'avatar' => ['nullable', 'image'],
             'biography' => ['nullable', 'string', 'max:600'],
             'location' => ['nullable', 'string', 'max:36'],
-            'name_displayed' => ['required', 'string', 'max:36', 'unique:profiles'],
+            'name_displayed' => ['nullable', 'string', 'max:36', 'unique:profiles'],
         ]);
 
         $profile = new Profile;
-        $profile->name_displayed = $request->name_displayed;
         $profile->location = $request->location;
 
         $user = Auth::user();
         $user->successfully_registered = TRUE;
         $user->save();
-
-        $profile->user_id = $user->id;
 
         if ($request->hasFile('avatar'))
         {
@@ -48,10 +45,41 @@ class RegisterStep2Controller extends Controller
             $profile->avatar = 'avatars/defaultAvatar.jpg';
         }
 
+        if ($request->has('biography') && !empty($request->input('biography')))
+        {
+            $profile->biography = $request->biography;
+        }
+
+        else
+        {
+            $profile->location = '...';
+        }
+
+        if ($request->has('location') && !empty($request->input('location')))
+        {
+            $profile->location = $request->location;
+        }
+
+        else
+        {
+            $profile->location = '...';
+        }
+
+        if ($request->has('name_displayed') && !empty($request->input('name_displayed')))
+        {
+            $profile->name_displayed = $request->name_displayed;
+        }
+
+        else
+        {
+            $profile->name_displayed = $user->name;
+        }
+
+        $profile->user_id = $user->id;
         $profile->save();
 
         $profile_page = new ProfilePage;
-        $profile_page->biography = $request->biography;
+        $profile_page->biography = $profile->biography;
         $profile_page->views = '0';
         $profile_page->profile_id = $profile->id;
         $profile_page->save();
