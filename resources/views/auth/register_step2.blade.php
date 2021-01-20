@@ -71,7 +71,7 @@
                                 <div class="clearfix">
                                     <img src="{{asset('/storage/avatars/defaultAvatar.jpg')}}" alt="Default avatar" width="200" class="pt-4">
                                         <div class="mt-1 mb-1 text-sm">
-                                            If you choose to not upload your own avatar, the default one will be used, shown above.
+                                            If you choose to not upload your own avatar, a default one will be used, shown above.
                                         </div>
                                 </div>
 

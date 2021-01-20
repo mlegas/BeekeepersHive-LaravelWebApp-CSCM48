@@ -32,9 +32,18 @@
 
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav">
+                    @auth
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{{ route('home') }}">{{ __('Home') }}</a>
+                            </li>
 
-                    </ul>
+                            {{-- <li class="nav-item">
+                                <a class="nav-link" href="{{ route('post') }}">{{ __('Post') }}</a>
+                            </li> --}}
+                        </ul>
+                    @endauth
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -52,12 +61,31 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item">
-                                <form action="{{ route('logout') }}" method="post">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary"> Logout </button>
-                                </form>
-                            </li>
+                            @if (Auth::user()->profile->name_displayed == Auth::user()->name)
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <p class="text-white">
+                                            Welcome, {{ Auth::user()->name }}
+                                        </p>
+                                    </li>
+                                </ul>
+                            @else
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <p class="text-white">
+                                            Welcome, {{ Auth::user()->profile->name_displayed (Auth::user()->name)}}
+                                        </p>
+                                    </li>
+                                </ul>
+                            @endif
+                            @if (Route::has('logout'))
+                                    <li class="nav-item">
+                                    <form action="{{ route('logout') }}" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary"> Logout </button>
+                                    </form>
+                                    </li>
+                            @endif
                         @endguest
                     </ul>
                 </div>
