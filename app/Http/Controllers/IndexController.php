@@ -13,7 +13,7 @@ class IndexController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['profile.completed', 'verified']);
+        $this->middleware(['profile.completed']);
     }
 
     /**

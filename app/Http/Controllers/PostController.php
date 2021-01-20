@@ -27,7 +27,7 @@ class PostController extends Controller
         $this->validate($request, [
             'topic' => ['required', 'string', 'max:100'],
             'content' => ['required', 'string', 'max:5000'],
-            'image' => ['nullable', 'image', 'size:20480'],
+            'image' => ['nullable', 'image'],
             'tags' => ['nullable', 'string', 'max:100'],
         ]);
 

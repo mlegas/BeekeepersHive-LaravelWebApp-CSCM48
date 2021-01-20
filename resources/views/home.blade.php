@@ -39,12 +39,18 @@
                                 <div class="col-md-8">
                                     <p> {{ $post->content }} </p>
 
+                                    @if ($post->image)
+                                        <img class="img-fluid rounded" src="{{ 'storage/'. $post->image }}"/>
+                                    @endif
+
                                     @if ($post->tags()->get()->isNotEmpty())
                                         Tags:
                                         @foreach ($post->tags()->get() as $tag)
                                             {{ $tag->name }}
                                         @endforeach
                                     @endif
+
+                                    <p class="float-right"> Comments (0) </p>
                                 </div>
                             </div>
                             <div class="row">
