@@ -16,8 +16,11 @@
                             <b> Welcome, dear guest! </b>
                             <p> Here we discuss our favourite hobby - beekeeping! By browsing through the posts of our community, you may learn many fascinating things about keeping your bees safe and happy. To join our community, click the register button in the navigation bar. If you have already registered, click on the login button.</p>
                         @else
-                            <b> Welcome back, {{ Auth::user()->profile->name_displayed }}, to the Beekeepers Hive! </b>
-                            <p> Click on the Home button in the navigation bar to see the latest posts from your fellow beekeepers. Click on the Post page to add something yourself! Check your profile page by clicking on your name in the navigation bar. </p>
+                            @if (Auth::user()->successfully_registered)
+                               <b> Welcome back, {{ Auth::user()->profile->name_displayed }}, to the Beekeepers Hive! </b>
+                               <p> Click on the Home button in the navigation bar to see the latest posts from your fellow beekeepers. Click on the Post page to add something yourself! Check your profile page by clicking on your name in the navigation bar. </p>
+                            @else
+
                         @endguest
                     </div>
                 </div>

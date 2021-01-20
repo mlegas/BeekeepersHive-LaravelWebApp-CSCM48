@@ -35,7 +35,6 @@ class RegisterStep2Controller extends Controller
 
         if ($request->hasFile('avatar'))
         {
-            $avatar = $request->file('avatar');
             $path = $request->file('avatar')->store('avatars', 'public');
             $profile->avatar = $path;
         }
@@ -84,7 +83,7 @@ class RegisterStep2Controller extends Controller
         $profile_page->profile_id = $profile->id;
         $profile_page->save();
 
-        return redirect()->action([HomeController::class, 'index']);
+        return redirect()->action([HomeController::class, 'index'])->with('status', 'User successfully registered!');
     }
 
     public function index()

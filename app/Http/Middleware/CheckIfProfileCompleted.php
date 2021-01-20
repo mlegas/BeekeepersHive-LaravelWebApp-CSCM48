@@ -18,7 +18,12 @@ class CheckIfProfileCompleted
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->successfully_registered)
+        if (Auth::guest())
+        {
+            return $next($request);
+        }
+
+        else if (Auth::user()->successfully_registered)
         {
             return $next($request);
         }

@@ -38,9 +38,9 @@
                                 <a class="nav-link text-white" href="{{ route('home') }}">{{ __('Home') }}</a>
                             </li>
 
-                            {{-- <li class="nav-item">
-                                <a class="nav-link" href="{{ route('post') }}">{{ __('Post') }}</a>
-                            </li> --}}
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{{ route('post') }}">{{ __('Post') }}</a>
+                            </li>
                         </ul>
                     @endauth
 
