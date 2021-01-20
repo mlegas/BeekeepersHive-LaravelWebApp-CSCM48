@@ -20,9 +20,10 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
-Route::get('/register-step2', [App\Http\Controllers\Auth\RegisterStep2Controller::class, 'index']);
-Route::post('/register-step2', [App\Http\Controllers\Auth\RegisterStep2Controller::class, 'store'])->name('register.step2');
+Route::get('/register-step2', [App\Http\Controllers\Auth\RegisterStep2Controller::class, 'index'])->name('register.step2');
+Route::post('/register-step2', [App\Http\Controllers\Auth\RegisterStep2Controller::class, 'store']);
 
-Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts');
+Route::get('/post', [App\Http\Controllers\PostController::class, 'index'])->name('post');
+Route::post('/post', [App\Http\Controllers\PostController::class, 'store']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

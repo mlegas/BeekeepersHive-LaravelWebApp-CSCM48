@@ -61,19 +61,29 @@
                                 </li>
                             @endif
                         @else
-                            @if (Auth::user()->profile->name_displayed == Auth::user()->name)
-                                <ul class="navbar-nav">
-                                    <li class="nav-item">
-                                        <p class="text-white">
-                                            Welcome, {{ Auth::user()->name }}
-                                        </p>
-                                    </li>
-                                </ul>
+                            @if (Auth::user()->successfully_registered)
+                                @if (Auth::user()->profile->name_displayed == Auth::user()->name)
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item">
+                                            <p class="text-white">
+                                                Welcome, {{ Auth::user()->name }}
+                                            </p>
+                                        </li>
+                                    </ul>
+                                @else
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item">
+                                                <p class="text-white">
+                                                    Welcome, {{ Auth::user()->profile->name_displayed }} ({{ Auth::user()->name }})
+                                                </p>
+                                            </li>
+                                        </ul>
+                                @endif
                             @else
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
                                         <p class="text-white">
-                                            Welcome, {{ Auth::user()->profile->name_displayed (Auth::user()->name)}}
+                                            Welcome, {{ Auth::user()->name }}
                                         </p>
                                     </li>
                                 </ul>
@@ -96,5 +106,10 @@
             @yield('content')
         </main>
     </div>
+
+    <footer class="text-center pt-2 pb-1 rounded-pill" style="background-color: rgba(0, 0, 0, 0.1)">
+        <strong> {{ date('Y-m-d') }}, Beekeepers Hive. </strong>
+        <p> The friendliest place for all beekeepers on the planet Earth (and possibly beyond). </p>
+    </footer>
 </body>
 </html>
