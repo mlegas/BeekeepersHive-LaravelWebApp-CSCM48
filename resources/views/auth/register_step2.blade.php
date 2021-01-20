@@ -12,7 +12,7 @@
                     <form method="POST" action="{{ route('register.step2') }}" enctype="multipart/form-data">
                         @csrf
 
-                        <div class="mb-3 text-gray-600 dark:text-gray-400 text-sm-left">
+                        <div class="mb-3 text-sm-left">
                             The following fields are optional and allow you to describe yourself a bit more. If you do not wish to specify any of these, just click the "Finish Registration" button down below.
                         </div>
 
@@ -22,7 +22,7 @@
                             <div class="col-md-6">
                                 <input id="name_displayed" type="text" class="form-control @error('name_displayed') is-invalid @enderror" name="name_displayed" value="{{ old('name_displayed') }}" autocomplete="name_displayed" autofocus>
 
-                                <div class="mt-1 mb-1 text-gray-600 dark:text-gray-400 text-sm">
+                                <div class="mt-1 mb-1 text-sm">
                                     If you do not set a display name, your username will be used instead.
                                 </div>
 
@@ -70,7 +70,9 @@
 
                                 <div class="clearfix">
                                     <img src="{{asset('/storage/avatars/defaultAvatar.jpg')}}" alt="Default avatar" width="200" class="pt-4">
-                                        <p> If you choose to not upload your own avatar, the default one will be used, shown above. </p>
+                                        <div class="mt-1 mb-1 text-sm">
+                                            If you choose to not upload your own avatar, the default one will be used, shown above.
+                                        </div>
                                 </div>
 
                                 @error('avatar')

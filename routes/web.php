@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes(['verify' => true]);
-Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
+Route::post('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 Route::get('register-step2', [App\Http\Controllers\Auth\RegisterStep2Controller::class, 'index']);
 Route::post('register-step2', [App\Http\Controllers\Auth\RegisterStep2Controller::class, 'store'])->name('register.step2');
