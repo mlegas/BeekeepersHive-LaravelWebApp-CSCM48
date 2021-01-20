@@ -22,6 +22,7 @@ class ProfileFactory extends Factory
     public function definition()
     {
         return [
+            'avatar' => 'avatars/defaultAvatar.jpg',
             'name_displayed' => $this->faker->name(),
             'location' => $this->faker->city(),
             'user_id' => \App\Models\User::factory()->create()->id,

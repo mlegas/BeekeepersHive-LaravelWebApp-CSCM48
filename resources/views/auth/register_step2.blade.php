@@ -18,7 +18,7 @@
                             <div class="col-md-6">
                                 <input id="name_displayed" type="text" class="form-control @error('name_displayed') is-invalid @enderror" name="name_displayed" value="{{ old('name_displayed') }}" required autocomplete="name_displayed" autofocus>
 
-                                @error('name')
+                                @error('name_displayed')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -59,6 +59,11 @@
 
                             <div class="col-md-6">
                                 <input id="avatar" type="file" name="avatar">
+
+                                <div class="clearfix">
+                                    <img src="{{asset('/storage/avatars/defaultAvatar.jpg')}}" alt="Default avatar" width="200" class="pt-4">
+                                        <p> If you choose to not upload your own avatar, the default one will be used, as shown above. </p>
+                                </div>
 
                                 @error('avatar')
                                     <span class="invalid-feedback" role="alert">

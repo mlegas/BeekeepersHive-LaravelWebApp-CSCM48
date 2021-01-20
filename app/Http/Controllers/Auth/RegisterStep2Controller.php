@@ -12,8 +12,20 @@ use Illuminate\Http\Request;
 
 class RegisterStep2Controller extends Controller
 {
-    public function postForm(Request $request)
+    public function __construct()
     {
+        $this->middleware('auth');
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'avatar' => ['nullable', 'image'],
+            'biography' => ['nullable', 'string', 'max:600'],
+            'location' => ['nullable', 'string', 'max:36'],
+            'name_displayed' => ['required', 'string', 'max:36', 'unique:profiles'],
+        ]);
+
         $profile = new Profile;
         $profile->name_displayed = $request->name_displayed;
         $profile->location = $request->location;
@@ -33,7 +45,7 @@ class RegisterStep2Controller extends Controller
 
         else
         {
-            $profile->avatar = 'defaultAvatar.jpg';
+            $profile->avatar = 'avatars/defaultAvatar.jpg';
         }
 
         $profile->save();
@@ -47,7 +59,7 @@ class RegisterStep2Controller extends Controller
         return redirect()->action([HomeController::class, 'index']);
     }
 
-    public function showForm()
+    public function index()
     {
         if (!Auth::user()->successfully_registered)
         {
@@ -58,15 +70,5 @@ class RegisterStep2Controller extends Controller
         {
             return redirect()->action([HomeController::class, 'index']);
         }
-    }
-
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'avatar' => ['nullable', 'image'],
-            'biography' => ['nullable', 'string', 'max:3000'],
-            'location' => ['nullable', 'string', 'max:255'],
-            'name_displayed' => ['required', 'string', 'max:255', 'unique:users'],
-        ]);
     }
 }
