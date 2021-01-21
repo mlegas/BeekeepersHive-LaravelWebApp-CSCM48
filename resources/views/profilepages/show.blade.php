@@ -11,6 +11,11 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
                     <div class="row">
                         <div class="col-md-4">
                             <div>
@@ -34,10 +39,8 @@
                             <div class="pt-4 row">
                                 @can('edit', $profile_page)
                                 <div class="col">
-                                    <form action="{{ route('profilepages.edit', $profile_page) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-secondary">Edit Post</button>
+                                    <form action="{{ route('profilepages.edit', $profile_page) }}" method="get">
+                                        <button type="submit" class="btn btn-secondary">Edit Profile</button>
                                     </form>
                                 </div>
                                 @endcan

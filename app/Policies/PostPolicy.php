@@ -2,22 +2,17 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PostPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
     public function edit(User $user, Post $post)
     {
-        if ($user->id === $post->profile->user_id || $user->is_admin)
+        if ($user->id === $post->profile->user_id)
         {
             return TRUE;
         }

@@ -5,19 +5,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ 'Homepage' }}</div>
-
+                <div class="card-header">
+                    <div>
+                        <strong>Posts using tag: {{ $tag->name }}</strong>
+                    </div>
+                </div>
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    <p> Welcome to the homepage of Beekeepers Hive. You can access the newest posts by scrolling down the page. </p>
+                    <p> Below you can find posts that use the tag of the name of "{{ $tag->name }}". </p>
                 </div>
             </div>
         </div>
-        @if ($posts->count())
+        @if ($tag->posts->count())
             @foreach ($posts as $post)
                 <div class="col-md-8 pt-4">
                     <div class="card">
@@ -30,6 +28,11 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
                             <div class="row">
                                 <div class="col-md-4">
                                     <div>
@@ -128,11 +131,8 @@
                     </div>
                 </div>
             @endforeach
-            <div class="pt-4 d-flex justify-content-center align-items-center">
-                {{ $posts->links() }}
-            </div>
         @else
-        <p> No posts have been found! Something has gone terribly wrong in the world. </p>
+        <p> No posts have been found using the tag of name {{ $tag->name }}. Maybe create one yourself? </p>
         @endif
     </div>
 </div>

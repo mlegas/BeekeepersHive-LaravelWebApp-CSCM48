@@ -116,8 +116,8 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $this->validate($request, [
-            'topic' => ['required', 'string', 'max:100'],
-            'content' => ['required', 'string', 'max:5000'],
+            'topic' => ['nullable', 'string', 'max:100'],
+            'content' => ['nullable', 'string', 'max:5000'],
             'image' => ['nullable', 'image'],
             'tags' => ['nullable', 'string', 'max:100'],
         ]);
@@ -125,14 +125,21 @@ class PostController extends Controller
         $post->topic = $request->topic;
         $post->content = $request->content;
 
+        if ($request->has('topic') && !empty($request->input('topic')))
+        {
+            $post->topic = $request->topic;
+        }
+
+        if ($request->has('content') && !empty($request->input('content')))
+        {
+            $post->content = $request->content;
+        }
+
         if ($request->hasFile('image'))
         {
             $path = $request->file('image')->store('images', 'public');
             $post->image = $path;
         }
-
-        $post->profile_id = Auth::user()->profile->id;
-        $post->save();
 
         if ($request->has('tags') && !empty($request->input('tags')))
         {
@@ -155,6 +162,10 @@ class PostController extends Controller
             }
             $post->tags()->sync($tagIds);
         }
+
+        $post->profile_id = Auth::user()->profile->id;
+        $this->authorize('edit', $post);
+        $post->save();
 
         return redirect()->action([PostController::class, 'index'])->with('status', 'Post successfully edited!');
     }

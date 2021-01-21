@@ -10,14 +10,9 @@ class ProfilePagePolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
     public function edit(User $user, ProfilePage $profile_page)
     {
-        if ($user->id === $profile_page->profile->user_id || $user->is_admin)
+        if ($user->id === $profile_page->profile->user_id)
         {
             return TRUE;
         }

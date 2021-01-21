@@ -29,8 +29,13 @@ Route::delete('/posts/{post}', [App\Http\Controllers\PostController::class, 'des
 Route::get('/posts/{post}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
 Route::patch('/posts/{post}/update', [App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
 
+Route::get('/tags/{tag}', [App\Http\Controllers\TagController::class, 'show'])->name('tags.show');
+
 Route::post('/posts/{post}', [App\Http\Controllers\CommentController::class, 'storePost'])->name('comments.post.store');
 Route::post('/profiles/{profile_page}', [App\Http\Controllers\CommentController::class, 'storeProfilePage'])->name('comments.profilepage.store');
+Route::get('/comments/{comment}/edit', [App\Http\Controllers\CommentController::class, 'edit'])->name('comments.edit');
+Route::patch('/comments/{comments}/update', [App\Http\Controllers\CommentController::class, 'update'])->name('comments.update');
 
 Route::get('/profiles/{profile_page}', [App\Http\Controllers\ProfilePageController::class, 'show'])->name('profilepages.show');
-Route::patch('/posts/{profile_page}', [App\Http\Controllers\ProfilePageController::class, 'edit'])->name('profilepages.edit');
+Route::get('/profiles/{profile_page}/edit', [App\Http\Controllers\ProfilePageController::class, 'edit'])->name('profilepages.edit');
+Route::patch('/profiles/{profile_page}/update', [App\Http\Controllers\ProfilePageController::class, 'update'])->name('profilepages.update');

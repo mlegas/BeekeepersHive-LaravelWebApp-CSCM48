@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\ProfilePage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,22 @@ class CommentController extends Controller
         $comment->profile_id = Auth::user()->profile->id;
         $comment->commentable_id = $post->id;
         $comment->commentable_type = \App\Models\Post::class;
+        $comment->content = $request->comment;
+        $comment->save();
+
+        return back()->with('status', 'Comment successfully submitted!');
+    }
+
+    public function storeProfilePage(Request $request, ProfilePage $profile_page)
+    {
+        $this->validate($request, [
+            'comment' => ['required', 'string', 'max:1500'],
+        ]);
+
+        $comment = new Comment;
+        $comment->profile_id = Auth::user()->profile->id;
+        $comment->commentable_id = $profile_page->id;
+        $comment->commentable_type = \App\Models\ProfilePage::class;
         $comment->content = $request->comment;
         $comment->save();
 
