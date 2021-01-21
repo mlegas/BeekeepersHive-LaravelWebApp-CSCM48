@@ -19,9 +19,10 @@ Auth::routes(['verify' => true]);
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 Route::get('/register-step2', [App\Http\Controllers\Auth\RegisterStep2Controller::class, 'index'])->name('register.step2');
-Route::post('/register-step2', [App\Http\Controllers\Auth\RegisterStep2Controller::class, 'store']);
+Route::post('/register-step2', [App\Http\Controllers\Auth\RegisterStep2Controller::class, 'store'])->name('register.step2.store');
 
-Route::get('/post', [App\Http\Controllers\PostController::class, 'index'])->name('post');
-Route::post('/post', [App\Http\Controllers\PostController::class, 'store']);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/create', [App\Http\Controllers\PostController::class, 'create'])->name('posts.create');
+Route::post('/posts', [App\Http\Controllers\PostController::class, 'store'])->name('posts.store');
+Route::get('/posts/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+Route::delete('/posts/{id}', [App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');

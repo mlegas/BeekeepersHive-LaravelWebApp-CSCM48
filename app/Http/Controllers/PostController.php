@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Profile;
 use App\Models\Tag;
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -17,9 +15,23 @@ class PostController extends Controller
         $this->middleware(['auth', 'profile.completed', 'verified']);
     }
 
+    public function create()
+    {
+        return view('posts.newpost');
+    }
+
+    public function destroy(Post $post)
+    {
+        dd($post);
+    }
+
     public function index()
     {
-        return view('post');
+        $posts = Post::orderBy('created_at', 'DESC')->paginate(10);
+
+        return view('posts.posts', [
+            'posts' => $posts
+        ]);
     }
 
     public function store(Request $request)
@@ -55,6 +67,9 @@ class PostController extends Controller
 
             foreach ($tagNames as $tagName)
             {
+                $tagName = strtolower($tagName);
+                $tagName = str_replace(' ', '', $tagName);
+
                 $tag = Tag::firstOrCreate([
                     'name' => $tagName
                 ]);
@@ -68,6 +83,6 @@ class PostController extends Controller
             $post->tags()->sync($tagIds);
         }
 
-        return redirect()->action([HomeController::class, 'index'])->with('status', 'Post successfully submitted!');
+        return redirect()->action([PostController::class, 'index'])->with('status', 'Post successfully submitted!');
     }
 }

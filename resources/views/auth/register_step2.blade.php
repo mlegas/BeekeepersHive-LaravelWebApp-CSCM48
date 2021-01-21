@@ -9,7 +9,7 @@
                 <div class="card-header">{{ __('Register Step 2 (Optional fields)') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register.step2') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('register.step2.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-3 text-sm-left">

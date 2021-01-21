@@ -50,6 +50,22 @@
                                         @endforeach
                                     @endif
                                     <p> Comments (0) </p>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <form action="{{ route('posts.destroy', $post) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-primary"> Edit Post </button>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <form action="{{ route('posts.destroy', $post) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger"> Delete Post </button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

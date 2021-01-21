@@ -35,11 +35,11 @@
                     @auth
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('home') }}">{{ __('Home') }}</a>
+                                <a class="nav-link text-white" href="{{ route('posts.index') }}">{{ __('Home') }}</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('post') }}">{{ __('Post') }}</a>
+                                <a class="nav-link text-white" href="{{ route('posts.create') }}">{{ __('Post') }}</a>
                             </li>
                         </ul>
                     @endauth

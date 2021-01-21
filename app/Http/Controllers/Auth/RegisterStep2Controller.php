@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Models\Profile;
 use App\Models\ProfilePage;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class RegisterStep2Controller extends Controller
@@ -83,7 +82,7 @@ class RegisterStep2Controller extends Controller
         $profile_page->profile_id = $profile->id;
         $profile_page->save();
 
-        return redirect()->action([HomeController::class, 'index'])->with('status', 'User successfully registered!');
+        return redirect()->action([PostController::class, 'index'])->with('status', 'User successfully registered!');
     }
 
     public function index()
@@ -95,7 +94,7 @@ class RegisterStep2Controller extends Controller
 
         else
         {
-            return redirect()->action([HomeController::class, 'index']);
+            return redirect()->action([PostController::class, 'index']);
         }
     }
 }
