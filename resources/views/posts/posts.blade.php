@@ -124,7 +124,7 @@
                                         <label for="comment" class="col-md-4 col-form-label text-md-right">{{ 'Add a comment' }}</label>
 
                                         <div class="col-md-8">
-                                            <textarea rows="3" class="form-control @error('comment') is-invalid @enderror" name="comment" placeholder="Write a comment." required autofocus></textarea>
+                                            <textarea rows="3" class="form-control @error('comment') is-invalid @enderror" name="comment" placeholder="Write a comment." required></textarea>
 
                                             @error('comment')
                                                 <span class="invalid-feedback" role="alert">

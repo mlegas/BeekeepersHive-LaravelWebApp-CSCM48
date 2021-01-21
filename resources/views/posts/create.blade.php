@@ -58,14 +58,14 @@
                         <div class="form-group row">
                             <label for="image" class="col-md-4 col-form-label text-md-right">{{ 'Image' }}</label>
 
+                            @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+
                             <div class="col-md-6">
                                 <input id="image" type="file" name="image">
-
-                                @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         </div>
 

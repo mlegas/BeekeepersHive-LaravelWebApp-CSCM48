@@ -23,6 +23,6 @@ class UserTableSeeder extends Seeder
         $user->remember_token = Str::random(10);
         $user->save();
 
-        # Factory in Profile factory.
+        # User Factory can be found in the Profile factory.
     }
 }

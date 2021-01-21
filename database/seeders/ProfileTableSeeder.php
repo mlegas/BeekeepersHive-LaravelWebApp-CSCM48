@@ -20,6 +20,6 @@ class ProfileTableSeeder extends Seeder
         $profile->user_id = 1;
         $profile->save();
 
-        # Factory in Profile Page factory.
+        # Profile Factory can be found in the Profile Page factory.
     }
 }

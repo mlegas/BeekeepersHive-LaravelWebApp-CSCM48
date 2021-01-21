@@ -42,7 +42,7 @@
                             @if ($post->tags()->get()->isNotEmpty())
                                 Tags:
                                 @foreach ($post->tags()->get() as $tag)
-                                    {{ $tag->name }}
+                                    <a href="{{ route('tags.show', ['tag' => $tag]) }}">{{ $tag->name}}</a>
                                 @endforeach
                             @endif
                             <div class="pt-4 row">

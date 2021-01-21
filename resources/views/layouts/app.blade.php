@@ -46,7 +46,7 @@
 
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto mt-2">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -80,7 +80,7 @@
                             @else
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <p class="text-white">
+                                        <p class="text-white pe-4">
                                             {{ Auth::user()->name }}
                                         </p>
                                     </li>
