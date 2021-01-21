@@ -34,8 +34,7 @@ Route::get('/tags/{tag}', [App\Http\Controllers\TagController::class, 'show'])->
 Route::post('/posts/{post}', [App\Http\Controllers\CommentController::class, 'storePost'])->name('comments.post.store');
 Route::post('/profiles/{profile_page}', [App\Http\Controllers\CommentController::class, 'storeProfilePage'])->name('comments.profilepage.store');
 Route::delete('/comments/{comment}', [App\Http\Controllers\CommentController::class, 'destroy'])->name('comments.destroy');
-Route::get('/comments/{comment}/editPost', [App\Http\Controllers\CommentController::class, 'editPost'])->name('comments.post.edit');
-Route::get('/comments/{comment}/editProfilePage', [App\Http\Controllers\CommentController::class, 'editProfilePage'])->name('comments.profilepage.edit');
+Route::get('/comments/{comment}/edit', [App\Http\Controllers\CommentController::class, 'edit'])->name('comments.edit');
 Route::patch('/comments/{comment}/update', [App\Http\Controllers\CommentController::class, 'update'])->name('comments.update');
 
 Route::get('/profiles/{profile_page}', [App\Http\Controllers\ProfilePageController::class, 'show'])->name('profilepages.show');

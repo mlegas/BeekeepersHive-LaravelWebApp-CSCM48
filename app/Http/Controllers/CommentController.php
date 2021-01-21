@@ -24,23 +24,12 @@ class CommentController extends Controller
         return redirect()->action([PostController::class, 'index'])->with('status', 'Comment successfully deleted!');
     }
 
-    public function editPost(Comment $comment, Post $post)
+    public function edit(Comment $comment)
     {
         $this->authorize('edit', $comment);
 
-        return view('comments.editPost', [
+        return view('comments.edit', [
             'comment' => $comment,
-            'post' => $post
-        ]);
-    }
-
-    public function editProfilePage(Comment $comment, ProfilePage $profile_page)
-    {
-        $this->authorize('edit', $comment);
-
-        return view('comments.editProfilePage', [
-            'comment' => $comment,
-            'profile_page' => $profile_page
         ]);
     }
 
@@ -57,7 +46,7 @@ class CommentController extends Controller
         $comment->content = $request->comment;
         $comment->save();
 
-        return back()->with('status', 'Comment successfully submitted!');
+        return redirect()->action([PostController::class, 'show'], ['post' => $comment->commentable_id])->with('status', 'Comment successfully submitted!');
     }
 
     public function storeProfilePage(Request $request, ProfilePage $profile_page)
@@ -73,21 +62,33 @@ class CommentController extends Controller
         $comment->content = $request->comment;
         $comment->save();
 
-        return back()->with('status', 'Comment successfully submitted!');
+        return redirect()->action([ProfilePageController::class, 'show'], ['profile_page' => $comment->commentable_id])->with('status', 'Comment successfully submitted!');
     }
 
     public function update(Request $request, Comment $comment)
     {
         $this->validate($request, [
-            'content' => ['required', 'string', 'max:1500'],
+            'content' => ['nullable', 'string', 'max:1500'],
         ]);
 
+        if ($request->has('content') && !empty($request->input('content')))
+        {
+            $comment->content = $request->content;
+        }
+
         $comment->profile_id = Auth::user()->profile->id;
-        $comment->content = $request->content;
 
         $this->authorize('edit', $comment);
         $comment->save();
 
-        return back()->with('status', 'Comment successfully edited!');
+        if ($comment->commentable_type === Post::class)
+        {
+            return redirect()->action([PostController::class, 'show'], ['post' => $comment->commentable_id])->with('status', 'Comment successfully edited!');
+        }
+
+        else if ($comment->commentable_type === ProfilePage::class)
+        {
+            return redirect()->action([ProfilePageController::class, 'show'], ['profile_page' => $comment->commentable_id])->with('status', 'Comment successfully edited!');
+        }
     }
 }

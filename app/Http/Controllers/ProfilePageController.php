@@ -67,6 +67,6 @@ class ProfilePageController extends Controller
         $this->authorize('edit', $profile_page);
         $profile_page->save();
 
-        return back()->with('status', 'Profile successfully edited!');
+        return redirect()->action([ProfilePageController::class, 'show'], ['profile_page' => $profile_page])->with('status', 'Profile page successfully edited!');
     }
 }

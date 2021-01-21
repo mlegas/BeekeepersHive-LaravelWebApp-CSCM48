@@ -100,7 +100,7 @@
                                             <div class="pt-4 row">
                                                 @can('edit', $comment)
                                                 <div class="col">
-                                                    <form action="{{ route('comments.post.edit', $comment, $post) }}" method="get">
+                                                    <form action="{{ route('comments.edit', $comment) }}" method="get">
                                                         <button type="submit" class="btn btn-secondary">Edit Comment</button>
                                                     </form>
                                                 </div>
