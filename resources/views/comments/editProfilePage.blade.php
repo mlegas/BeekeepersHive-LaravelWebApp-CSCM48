@@ -9,7 +9,7 @@
                 <div class="card-header">{{ 'Change your comment' }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('comments.update', $post) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('comments.profilepage.update', $comment, $profile_page) }}">
                         @csrf
                         @method('PATCH')
 
@@ -17,7 +17,7 @@
                             <label for="content" class="col-md-4 col-form-label text-md-right">{{ 'Content' }}</label>
 
                             <div class="col-md-6">
-                                <textarea rows="10" class="form-control @error('content') is-invalid @enderror" name="content" placeholder={{  "Write new content for this comment. Leave this field blank to use the old one." }}>{{ old('content') }}</textarea>
+                                <textarea rows="10" class="form-control @error('content') is-invalid @enderror" name="content" placeholder="Write new content for this comment. Leave this field blank to use the old one.">{{ old('content') }}</textarea>
 
                                 @error('content')
                                     <span class="invalid-feedback" role="alert">

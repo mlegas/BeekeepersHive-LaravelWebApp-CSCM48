@@ -24,36 +24,24 @@ class CommentController extends Controller
         return redirect()->action([PostController::class, 'index'])->with('status', 'Comment successfully deleted!');
     }
 
-    public function editPost(Request $request, Post $post)
+    public function editPost(Comment $comment, Post $post)
     {
-        $this->validate($request, [
-            'comment' => ['required', 'string', 'max:1500'],
+        $this->authorize('edit', $comment);
+
+        return view('comments.editPost', [
+            'comment' => $comment,
+            'post' => $post
         ]);
-
-        $comment = new Comment;
-        $comment->profile_id = Auth::user()->profile->id;
-        $comment->commentable_id = $post->id;
-        $comment->commentable_type = \App\Models\Post::class;
-        $comment->content = $request->comment;
-        $comment->save();
-
-        return back()->with('status', 'Comment successfully submitted!');
     }
 
-    public function editProfilePage(Request $request, ProfilePage $profile_page)
+    public function editProfilePage(Comment $comment, ProfilePage $profile_page)
     {
-        $this->validate($request, [
-            'comment' => ['required', 'string', 'max:1500'],
+        $this->authorize('edit', $comment);
+
+        return view('comments.editProfilePage', [
+            'comment' => $comment,
+            'profile_page' => $profile_page
         ]);
-
-        $comment = new Comment;
-        $comment->profile_id = Auth::user()->profile->id;
-        $comment->commentable_id = $profile_page->id;
-        $comment->commentable_type = \App\Models\ProfilePage::class;
-        $comment->content = $request->comment;
-        $comment->save();
-
-        return back()->with('status', 'Comment successfully submitted!');
     }
 
     public function storePost(Request $request, Post $post)
@@ -88,35 +76,18 @@ class CommentController extends Controller
         return back()->with('status', 'Comment successfully submitted!');
     }
 
-    public function updatePost(Request $request, Post $post)
+    public function update(Request $request, Comment $comment)
     {
         $this->validate($request, [
-            'comment' => ['required', 'string', 'max:1500'],
+            'content' => ['required', 'string', 'max:1500'],
         ]);
 
-        $comment = new Comment;
         $comment->profile_id = Auth::user()->profile->id;
-        $comment->commentable_id = $post->id;
-        $comment->commentable_type = \App\Models\Post::class;
-        $comment->content = $request->comment;
+        $comment->content = $request->content;
+
+        $this->authorize('edit', $comment);
         $comment->save();
 
-        return back()->with('status', 'Comment successfully submitted!');
-    }
-
-    public function updateProfilePage(Request $request, ProfilePage $profile_page)
-    {
-        $this->validate($request, [
-            'comment' => ['required', 'string', 'max:1500'],
-        ]);
-
-        $comment = new Comment;
-        $comment->profile_id = Auth::user()->profile->id;
-        $comment->commentable_id = $profile_page->id;
-        $comment->commentable_type = \App\Models\ProfilePage::class;
-        $comment->content = $request->comment;
-        $comment->save();
-
-        return back()->with('status', 'Comment successfully submitted!');
+        return back()->with('status', 'Comment successfully edited!');
     }
 }

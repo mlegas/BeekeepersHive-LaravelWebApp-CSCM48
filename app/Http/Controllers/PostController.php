@@ -167,6 +167,6 @@ class PostController extends Controller
         $this->authorize('edit', $post);
         $post->save();
 
-        return redirect()->action([PostController::class, 'index'])->with('status', 'Post successfully edited!');
+        return redirect()->action([PostController::class, 'show', ['post' => $post]])->with('status', 'Post successfully edited!');
     }
 }
