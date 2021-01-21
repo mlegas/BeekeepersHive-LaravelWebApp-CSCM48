@@ -7,10 +7,17 @@ use Illuminate\Http\Request;
 
 class ProfilePageController extends Controller
 {
-    public function show(ProfilePage $profilePage)
+    public function __construct()
     {
+        $this->middleware(['auth', 'profile.completed', 'verified']);
+    }
+
+    public function show(ProfilePage $profile_page)
+    {
+        dd($profile_page);
+
         return view('profilepages.show', [
-            'profilePage' => $profilePage
+            'profile_page' => $profile_page
         ]);
     }
 }

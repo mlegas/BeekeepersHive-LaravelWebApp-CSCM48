@@ -32,10 +32,16 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4">
-                                    {{-- // ADD A LINK TO AUTHOR AFTER IMPLEMENTING PROFILE PAGE FIX  --}}
-                                    <p>Author: {{ $post->profile->name_displayed }} </p>
-                                    <img class="img-fluid rounded w-50" src="{{ asset('storage/'.$post->profile->avatar) }}"/>
+                                    <div>
+                                        <strong>Author: <a href="{{ route('profilepages.show', ['profile_page' => $post->profile->profilePage]) }}">{{ $post->profile->name_displayed }}</a></strong>
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid rounded w-50" src="{{ asset('storage/'.$post->profile->avatar) }}"/>
+                                    </div>
+                                    <div>
                                     <p class="mt-2">Total views: {{ views($post)->count() }}</p>
+                                    <p>Unique views: {{ views($post)->unique()->count() }}</p>
+                                    </div>
                                 </div>
                                 <div class="col-md-8">
                                     <p> {{ $post->content }} </p>
@@ -53,16 +59,15 @@
                                     <div class="pt-4 row">
                                         <div class="col">
                                             <form action="{{ route('posts.show', $post) }}" method="get">
-                                                <button type="submit" class="btn btn-primary"> View the post directly </button>
+                                                <button type="submit" class="btn btn-primary">View the post directly</button>
                                             </form>
                                         </div>
                                         @can('edit', $post)
-                                        {{-- // FIX MAKE EDIT BY VUE --}}
                                         <div class="col">
                                             <form action="{{ route('posts.destroy', $post) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-secondary"> Edit Post </button>
+                                                <button type="submit" class="btn btn-secondary">Edit Post</button>
                                             </form>
                                         </div>
                                         @endcan
@@ -71,7 +76,7 @@
                                             <form action="{{ route('posts.destroy', $post) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"> Delete Post </button>
+                                                <button type="submit" class="btn btn-danger">Delete Post</button>
                                             </form>
                                         </div>
                                         @endcan
@@ -83,8 +88,12 @@
                                 @if ($post->comments()->get()->isNotEmpty())
                                     @foreach ($post->comments()->get() as $comment)
                                         <div class="col-md-4">
-                                            <strong>Author: {{ $comment->profile->name_displayed }}</strong>
-                                            <img class="img-fluid rounded w-50" src="{{ asset('storage/'.$comment->profile->avatar) }}"/>
+                                            <div>
+                                                <strong>Author: <a href="{{ route('profilepages.show', ['profile_page' => $comment->profile->profilePage]) }}">{{ $comment->profile->name_displayed }}</a></strong>
+                                            </div>
+                                            <div>
+                                                <img class="img-fluid rounded w-50" src="{{ asset('storage/'.$comment->profile->avatar) }}"/>
+                                            </div>
                                             <p>Posted: {{ $comment->created_at->diffForHumans() }} ({{ $comment->created_at }})</p>
                                         </div>
                                         <div class="col-md-8">
@@ -92,6 +101,30 @@
                                         </div>
                                     @endforeach
                                 @endif
+                                <form method="POST" action="{{ route('comments.post.store', ['post' => $post]) }}">
+                                    @csrf
+                                    <div class="form-group row">
+                                        <label for="comment" class="col-md-4 col-form-label text-md-right">{{ 'Add a comment' }}</label>
+
+                                        <div class="col-md-8">
+                                            <textarea rows="3" class="form-control @error('comment') is-invalid @enderror" name="comment" placeholder="Write a comment." required autofocus></textarea>
+
+                                            @error('comment')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group row mb-0 mt-4">
+                                            <div class="col-md-6 offset-md-4">
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{ 'Submit' }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

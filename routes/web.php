@@ -27,4 +27,7 @@ Route::post('/posts', [App\Http\Controllers\PostController::class, 'store'])->na
 Route::get('/posts/{post}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 Route::delete('/posts/{post}', [App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
 
-Route::get('/profiles/{profile}', [App\Http\Controllers\ProfilePageController::class, 'show'])->name('profiles.show');
+Route::post('/posts/{post}', [App\Http\Controllers\CommentController::class, 'storePost'])->name('comments.post.store');
+Route::post('/profiles/{profile_page}', [App\Http\Controllers\CommentController::class, 'storeProfilePage'])->name('comments.profilepage.store');
+
+Route::get('/profiles/{profile_page}', [App\Http\Controllers\ProfilePageController::class, 'show'])->name('profilepages.show');

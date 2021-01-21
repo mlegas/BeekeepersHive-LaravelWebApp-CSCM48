@@ -18,7 +18,7 @@ class Profile extends Model
         return $this->belongsTo('\App\Models\User');
     }
 
-    public function profilepage()
+    public function profilePage()
     {
         return $this->hasOne('\App\Models\ProfilePage');
     }

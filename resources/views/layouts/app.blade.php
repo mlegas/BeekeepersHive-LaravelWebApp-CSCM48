@@ -65,15 +65,14 @@
                                 @if (Auth::user()->profile->name_displayed == Auth::user()->name)
                                     <ul class="navbar-nav">
                                         <li class="nav-item">
-                                            {{-- // FIX THESE LINKS DOWN BELOW  --}}
-                                                <a class="nav-link text-white pe-4" href="#">{{ Auth::user()->name }}</a>
+                                                <a class="nav-link text-white pe-4" href="{{ route('profilepages.show', ['profile_page' => Auth::user()->profile->profilePage]) }}">{{ Auth::user()->name }}</a>
                                         </li>
                                     </ul>
                                 @else
                                         <ul class="navbar-nav">
                                             <li class="nav-item">
                                                 <p class="text-white">
-                                                    Welcome, {{ Auth::user()->profile->name_displayed }} ({{ Auth::user()->name }})
+                                                    <a class="nav-link text-white pe-4" href="{{ route('profilepages.show', ['profile_page' => Auth::user()->profile->profilePage]) }}">{{ Auth::user()->profile->name_displayed }} ({{ Auth::user()->name }})</a>
                                                 </p>
                                             </li>
                                         </ul>
@@ -82,7 +81,7 @@
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
                                         <p class="text-white">
-                                            Welcome, {{ Auth::user()->name }}
+                                            {{ Auth::user()->name }}
                                         </p>
                                     </li>
                                 </ul>

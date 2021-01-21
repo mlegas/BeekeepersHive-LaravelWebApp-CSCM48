@@ -15,7 +15,7 @@ class TagTableSeeder extends Seeder
     public function run()
     {
         $tag = new Tag;
-        $tag->name = 'Technology';
+        $tag->name = 'technology';
         $tag->save();
 
         Tag::factory()->count(20)->create();

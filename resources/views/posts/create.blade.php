@@ -13,7 +13,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="topic" class="col-md-4 col-form-label text-md-right">{{ 'Topic' }}</label>
+                            <label for="topic" class="col-md-4 col-form-label text-md-right">{{ 'Topic *' }}</label>
 
                             <div class="col-md-6">
                                 <textarea rows="3" class="form-control @error('topic') is-invalid @enderror" name="topic" placeholder="Write a topic for your post." required autofocus>{{ old('topic') }}</textarea>
@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="content" class="col-md-4 col-form-label text-md-right">{{ 'Content' }}</label>
+                            <label for="content" class="col-md-4 col-form-label text-md-right">{{ 'Content *' }}</label>
 
                             <div class="col-md-6">
                                 <textarea rows="10" class="form-control @error('content') is-invalid @enderror" name="content" placeholder="Write a description for your post." required>{{ old('content') }}</textarea>
@@ -66,6 +66,12 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                Fields marked with an asterisk (*) are required.
                             </div>
                         </div>
 
