@@ -64,9 +64,7 @@
                                         </div>
                                         @can('edit', $post)
                                         <div class="col">
-                                            <form action="{{ route('posts.destroy', $post) }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
+                                            <form action="{{ route('posts.edit', $post) }}" method="get">
                                                 <button type="submit" class="btn btn-secondary">Edit Post</button>
                                             </form>
                                         </div>

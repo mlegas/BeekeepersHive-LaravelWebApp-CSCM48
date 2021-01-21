@@ -7,60 +7,37 @@
             <div class="card">
                 <div class="card-header">
                     <div>
-                        <strong>Profile page of: {{ $profilePa->topic }}</strong>
-                    </div>
-                    <div>
-                        <strong>Posted: {{ $post->created_at->diffForHumans() }} ({{ $post->created_at }})</strong>
+                        <strong>Profile page of {{ $profile_page->profile->name_displayed }}</strong>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
                             <div>
-                                <strong>Author: <a href="{{ route('profilepages.show', ['profile_page' => $post->profile->profilePage]) }}">{{ $post->profile->name_displayed }}</a></strong>
+                                <strong>Name: {{ $profile_page->profile->name_displayed }} </strong>
                             </div>
                             <div>
-                                <img class="img-fluid rounded w-50" src="{{ asset('storage/'.$post->profile->avatar) }}"/>
+                                <img class="img-fluid rounded w-50" src="{{ asset('storage/'.$profile_page->profile->avatar) }}"/>
                             </div>
                             <div>
-                            <p class="mt-2">Total views: {{ views($post)->count() }}</p>
-                            <p>Unique views: {{ views($post)->unique()->count() }}</p>
+                            <p class="mt-2">Total views of profile: {{ views($profile_page)->count() }}</p>
+                            <p>Unique views of profile: {{ views($profile_page)->unique()->count() }}</p>
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <p> {{ $post->content }} </p>
-
-                            @if ($post->image)
-                                <img class="img-fluid rounded" src="{{ asset('storage/'.$post->image) }}"/>
-                            @endif
-
-                            @if ($post->tags()->get()->isNotEmpty())
-                                Tags:
-                                @foreach ($post->tags()->get() as $tag)
-                                    {{ $tag->name }}
-                                @endforeach
-                            @endif
+                            <div>
+                                <strong> Bio: </strong> {{ $profile_page->biography }}
+                            </div>
+                            <div>
+                                <strong> Location: </strong> {{ $profile_page->profile->location }}
+                            </div>
                             <div class="pt-4 row">
+                                @can('edit', $profile_page)
                                 <div class="col">
-                                    <form action="{{ route('posts.show', $post) }}" method="get">
-                                        <button type="submit" class="btn btn-primary">View the post directly</button>
-                                    </form>
-                                </div>
-                                @can('edit', $post)
-                                <div class="col">
-                                    <form action="{{ route('posts.destroy', $post) }}" method="post">
+                                    <form action="{{ route('profilepages.edit', $profile_page) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-secondary">Edit Post</button>
-                                    </form>
-                                </div>
-                                @endcan
-                                @can('delete', $post)
-                                <div class="col">
-                                    <form action="{{ route('posts.destroy', $post) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete Post</button>
                                     </form>
                                 </div>
                                 @endcan
@@ -68,9 +45,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <h4 class="pt-4"> Comments ({{ $post->comments()->count() }}) </h4>
-                        @if ($post->comments()->get()->isNotEmpty())
-                            @foreach ($post->comments()->get() as $comment)
+                        <h4 class="pt-4"> Comments ({{ $profile_page->comments()->count() }}) </h4>
+                        @if ($profile_page->comments()->get()->isNotEmpty())
+                            @foreach ($profile_page->comments()->get() as $comment)
                                 <div class="col-md-4">
                                     <div>
                                         <strong>Author: <a href="{{ route('profilepages.show', ['profile_page' => $comment->profile->profilePage]) }}">{{ $comment->profile->name_displayed }}</a></strong>
@@ -85,7 +62,7 @@
                                 </div>
                             @endforeach
                         @endif
-                        <form method="POST" action="{{ route('comments.post.store', ['post' => $post]) }}">
+                        <form method="POST" action="{{ route('comments.profilepage.store', ['profile_page' => $profile_page]) }}">
                             @csrf
                             <div class="form-group row">
                                 <label for="comment" class="col-md-4 col-form-label text-md-right">{{ 'Add a comment' }}</label>

@@ -14,8 +14,6 @@ class ProfilePageController extends Controller
 
     public function show(ProfilePage $profile_page)
     {
-        dd($profile_page);
-
         return view('profilepages.show', [
             'profile_page' => $profile_page
         ]);

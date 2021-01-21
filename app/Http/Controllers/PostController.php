@@ -29,6 +29,15 @@ class PostController extends Controller
         return redirect()->action([PostController::class, 'index'])->with('status', 'Post successfully deleted!');
     }
 
+    public function edit(Post $post)
+    {
+        $this->authorize('edit', $post);
+
+        return view('posts.edit', [
+            'post' => $post
+        ]);
+    }
+
     public function index()
     {
         $posts = Post::latest()->paginate(5);
@@ -102,5 +111,51 @@ class PostController extends Controller
         }
 
         return redirect()->action([PostController::class, 'index'])->with('status', 'Post successfully submitted!');
+    }
+
+    public function update(Request $request, Post $post)
+    {
+        $this->validate($request, [
+            'topic' => ['required', 'string', 'max:100'],
+            'content' => ['required', 'string', 'max:5000'],
+            'image' => ['nullable', 'image'],
+            'tags' => ['nullable', 'string', 'max:100'],
+        ]);
+
+        $post->topic = $request->topic;
+        $post->content = $request->content;
+
+        if ($request->hasFile('image'))
+        {
+            $path = $request->file('image')->store('images', 'public');
+            $post->image = $path;
+        }
+
+        $post->profile_id = Auth::user()->profile->id;
+        $post->save();
+
+        if ($request->has('tags') && !empty($request->input('tags')))
+        {
+            $tagNames = explode(',', $request->get('tags'));
+
+            foreach ($tagNames as $tagName)
+            {
+                $tagName = strtolower($tagName);
+                $tagName = str_replace(' ', '', $tagName);
+
+                $tag = Tag::firstOrCreate([
+                    'name' => $tagName
+                ]);
+
+                if ($tag)
+                {
+                    $tag->post_id = $post->id;
+                    $tagIds[] = $tag->id;
+                }
+            }
+            $post->tags()->sync($tagIds);
+        }
+
+        return redirect()->action([PostController::class, 'index'])->with('status', 'Post successfully edited!');
     }
 }

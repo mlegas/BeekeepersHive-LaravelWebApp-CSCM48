@@ -26,8 +26,11 @@ Route::get('/posts/create', [App\Http\Controllers\PostController::class, 'create
 Route::post('/posts', [App\Http\Controllers\PostController::class, 'store'])->name('posts.store');
 Route::get('/posts/{post}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 Route::delete('/posts/{post}', [App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
+Route::get('/posts/{post}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
+Route::patch('/posts/{post}/update', [App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
 
 Route::post('/posts/{post}', [App\Http\Controllers\CommentController::class, 'storePost'])->name('comments.post.store');
 Route::post('/profiles/{profile_page}', [App\Http\Controllers\CommentController::class, 'storeProfilePage'])->name('comments.profilepage.store');
 
 Route::get('/profiles/{profile_page}', [App\Http\Controllers\ProfilePageController::class, 'show'])->name('profilepages.show');
+Route::patch('/posts/{profile_page}', [App\Http\Controllers\ProfilePageController::class, 'edit'])->name('profilepages.edit');
