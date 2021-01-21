@@ -27,7 +27,7 @@
                                 <strong>Topic: {{ $post->topic }}</strong>
                             </div>
                             <div>
-                                <strong>Posted at: {{ $post->created_at }}</strong>
+                                <strong>Posted: {{ $post->created_at->diffForHumans() }} ({{ $post->created_at }})</strong>
                             </div>
                         </div>
                         <div class="card-body">
@@ -49,8 +49,8 @@
                                             {{ $tag->name }}
                                         @endforeach
                                     @endif
-                                    <p> Comments (0) </p>
-                                    <div class="row">
+                                    <div class="pt-4 row">
+                                        @can('edit', $post)
                                         <div class="col-md-3">
                                             <form action="{{ route('posts.destroy', $post) }}" method="post">
                                                 @csrf
@@ -58,6 +58,8 @@
                                                 <button type="submit" class="btn btn-primary"> Edit Post </button>
                                             </form>
                                         </div>
+                                        @endcan
+                                        @can('delete', $post)
                                         <div class="col-md-3">
                                             <form action="{{ route('posts.destroy', $post) }}" method="post">
                                                 @csrf
@@ -65,8 +67,24 @@
                                                 <button type="submit" class="btn btn-danger"> Delete Post </button>
                                             </form>
                                         </div>
+                                        @endcan
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <h4 class="pt-4"> Comments ({{ $post->comments()->count() }}) </h4>
+                                @if ($post->comments()->get()->isNotEmpty())
+                                    @foreach ($post->comments()->get() as $comment)
+                                        <div class="col-md-4">
+                                            <strong>Author: {{ $comment->profile->name_displayed }}</strong>
+                                            <img class="img-fluid rounded w-50" src="{{ 'storage/'. $comment->profile->avatar }}"/>
+                                            <p>Posted: {{ $comment->created_at->diffForHumans() }} ({{ $comment->created_at }})</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p> {{ $comment->content }} </p>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -21,7 +21,7 @@ class PostTableSeeder extends Seeder
         $post->profile_id = 1;
         $post->save();
 
-        Post::factory()->count(50)->create();
+        Post::factory()->count(20)->create();
 
         $posts = Post::get();
 

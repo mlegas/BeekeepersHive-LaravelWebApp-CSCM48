@@ -35,11 +35,11 @@
                     @auth
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('posts.index') }}">{{ __('Home') }}</a>
+                                <a class="nav-link text-white" href="{{ route('posts.index') }}">{{ 'Home' }}</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('posts.create') }}">{{ __('Post') }}</a>
+                                <a class="nav-link text-white" href="{{ route('posts.create') }}">{{ 'Post' }}</a>
                             </li>
                         </ul>
                     @endauth
@@ -51,13 +51,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ 'Login' }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ 'Register' }}</a>
                                 </li>
                             @endif
                         @else
@@ -65,9 +65,7 @@
                                 @if (Auth::user()->profile->name_displayed == Auth::user()->name)
                                     <ul class="navbar-nav">
                                         <li class="nav-item">
-                                            <p class="text-white">
-                                                Welcome, {{ Auth::user()->name }}
-                                            </p>
+                                                <a class="nav-link text-white pe-4" href="#">{{ Auth::user()->name }}</a>
                                         </li>
                                     </ul>
                                 @else

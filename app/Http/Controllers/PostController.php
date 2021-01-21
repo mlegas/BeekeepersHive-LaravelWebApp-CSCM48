@@ -22,12 +22,16 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        dd($post);
+        $this->authorize('delete', $post);
+
+        $post->delete();
+
+        return back();
     }
 
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'DESC')->paginate(10);
+        $posts = Post::latest()->paginate(10);
 
         return view('posts.posts', [
             'posts' => $posts
