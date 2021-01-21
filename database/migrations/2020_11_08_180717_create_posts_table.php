@@ -18,7 +18,6 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('topic');
             $table->longText('content');
-            $table->bigInteger('views');
             $table->string('image')->nullable();
 
             $table->unsignedBigInteger('profile_id');

@@ -17,7 +17,6 @@ class PostTableSeeder extends Seeder
         $post = new Post;
         $post->topic = 'Seeding in Laravel';
         $post->content = 'Seeding is a wonderful technique. I hope to do it more often!';
-        $post->views = 9001;
         $post->profile_id = 1;
         $post->save();
 

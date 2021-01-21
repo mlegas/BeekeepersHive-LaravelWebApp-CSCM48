@@ -11,8 +11,7 @@ class Post extends Model
 
     protected $attributes = ['content' => 'Lorem ipsum dolor sit amet,
                             consectetur adipiscing elit.',
-                            'topic' => 'Lorem ipsum',
-                            'views' => 0];
+                            'topic' => 'Lorem ipsum';
 
     // Creates a polymorphic one to many relationship with Comments.
     public function comments()

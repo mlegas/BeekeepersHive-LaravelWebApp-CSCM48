@@ -78,7 +78,6 @@ class RegisterStep2Controller extends Controller
 
         $profile_page = new ProfilePage;
         $profile_page->biography = $profile->biography;
-        $profile_page->views = '0';
         $profile_page->profile_id = $profile->id;
         $profile_page->save();
 

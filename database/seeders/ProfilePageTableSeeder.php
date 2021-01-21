@@ -16,7 +16,6 @@ class ProfilePageTableSeeder extends Seeder
     {
         $profile_page = new ProfilePage;
         $profile_page->biography = 'I love beekeeping!';
-        $profile_page->views = '42';
         $profile_page->profile_id = 1;
         $profile_page->save();
 
