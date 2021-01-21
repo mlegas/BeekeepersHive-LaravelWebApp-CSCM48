@@ -82,7 +82,7 @@ class RegisterStep2Controller extends Controller
         $profile_page->profile_id = $profile->id;
         $profile_page->save();
 
-        return redirect()->action([PostController::class, 'index'])->with('status', 'User successfully registered!');
+        return redirect()->action([PostController::class, 'index']);
     }
 
     public function index()

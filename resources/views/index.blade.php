@@ -8,7 +8,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="{{asset('/storage/bee.jpg')}}" alt="Bee" class="img-fluid rounded">
+                        <img src="{{ asset('storage/bee.jpg') }}" alt="Bee" class="img-fluid rounded">
                     </div>
 
                     <div class="col-md-6 ml-auto">

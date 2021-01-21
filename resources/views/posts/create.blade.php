@@ -13,7 +13,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="topic" class="col-md-4 col-form-label text-md-right">{{ __('Topic') }}</label>
+                            <label for="topic" class="col-md-4 col-form-label text-md-right">{{ 'Topic' }}</label>
 
                             <div class="col-md-6">
                                 <textarea rows="3" class="form-control @error('topic') is-invalid @enderror" name="topic" placeholder="Write a topic for your post." required autofocus>{{ old('topic') }}</textarea>
@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="content" class="col-md-4 col-form-label text-md-right">{{ __('Content') }}</label>
+                            <label for="content" class="col-md-4 col-form-label text-md-right">{{ 'Content' }}</label>
 
                             <div class="col-md-6">
                                 <textarea rows="10" class="form-control @error('content') is-invalid @enderror" name="content" placeholder="Write a description for your post." required>{{ old('content') }}</textarea>
@@ -42,7 +42,7 @@
 
 
                         <div class="form-group row">
-                            <label for="tags" class="col-md-4 col-form-label text-md-right">{{ __('Tags') }}</label>
+                            <label for="tags" class="col-md-4 col-form-label text-md-right">{{ 'Tags' }}</label>
 
                             <div class="col-md-6">
                                 <textarea rows="3" class="form-control @error('tags') is-invalid @enderror" name="tags" placeholder="Here you can specify tags if your post relates to any specific topics. Separate them by using commas, not spaces. In case of multiple words, use dashes.">{{ old('tags') }}</textarea>

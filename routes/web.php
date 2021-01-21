@@ -26,3 +26,5 @@ Route::get('/posts/create', [App\Http\Controllers\PostController::class, 'create
 Route::post('/posts', [App\Http\Controllers\PostController::class, 'store'])->name('posts.store');
 Route::get('/posts/{post}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 Route::delete('/posts/{post}', [App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
+
+Route::get('/profiles/{profile}', [App\Http\Controllers\ProfilePageController::class, 'show'])->name('profiles.show');

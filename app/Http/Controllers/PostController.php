@@ -17,7 +17,7 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.newpost');
+        return view('posts.create');
     }
 
     public function destroy(Post $post)
@@ -26,7 +26,7 @@ class PostController extends Controller
 
         $post->delete();
 
-        return back();
+        return redirect()->action([PostController::class, 'index'])->with('status', 'Post successfully deleted!');
     }
 
     public function index()
@@ -35,6 +35,13 @@ class PostController extends Controller
 
         return view('posts.posts', [
             'posts' => $posts
+        ]);
+    }
+
+    public function show(Post $post)
+    {
+        return view('posts.show', [
+            'post' => $post
         ]);
     }
 

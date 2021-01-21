@@ -13,7 +13,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
                     <p> Welcome to the homepage of Beekeepers Hive. You can access the newest posts by scrolling down the page. </p>
                 </div>
             </div>
@@ -33,14 +32,15 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4">
+                                    {{-- // ADD A LINK TO AUTHOR AFTER IMPLEMENTING PROFILE PAGE FIX  --}}
                                     <p>Author: {{ $post->profile->name_displayed }} </p>
-                                    <img class="img-fluid rounded w-50" src="{{ 'storage/'. $post->profile->avatar }}"/>
+                                    <img class="img-fluid rounded w-50" src="{{ asset('storage/'.$post->profile->avatar) }}"/>
                                 </div>
                                 <div class="col-md-8">
                                     <p> {{ $post->content }} </p>
 
                                     @if ($post->image)
-                                        <img class="img-fluid rounded" src="{{ 'storage/'. $post->image }}"/>
+                                        <img class="img-fluid rounded" src="{{ asset('storage/'.$post->image) }}"/>
                                     @endif
 
                                     @if ($post->tags()->get()->isNotEmpty())
@@ -50,17 +50,23 @@
                                         @endforeach
                                     @endif
                                     <div class="pt-4 row">
+                                        <div class="col">
+                                            <form action="{{ route('posts.show', $post) }}" method="get">
+                                                <button type="submit" class="btn btn-primary"> View the post directly </button>
+                                            </form>
+                                        </div>
                                         @can('edit', $post)
-                                        <div class="col-md-3">
+                                        {{-- // FIX MAKE EDIT BY VUE --}}
+                                        <div class="col">
                                             <form action="{{ route('posts.destroy', $post) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-primary"> Edit Post </button>
+                                                <button type="submit" class="btn btn-secondary"> Edit Post </button>
                                             </form>
                                         </div>
                                         @endcan
                                         @can('delete', $post)
-                                        <div class="col-md-3">
+                                        <div class="col">
                                             <form action="{{ route('posts.destroy', $post) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
@@ -77,7 +83,7 @@
                                     @foreach ($post->comments()->get() as $comment)
                                         <div class="col-md-4">
                                             <strong>Author: {{ $comment->profile->name_displayed }}</strong>
-                                            <img class="img-fluid rounded w-50" src="{{ 'storage/'. $comment->profile->avatar }}"/>
+                                            <img class="img-fluid rounded w-50" src="{{ asset('storage/'.$comment->profile->avatar) }}"/>
                                             <p>Posted: {{ $comment->created_at->diffForHumans() }} ({{ $comment->created_at }})</p>
                                         </div>
                                         <div class="col-md-8">
