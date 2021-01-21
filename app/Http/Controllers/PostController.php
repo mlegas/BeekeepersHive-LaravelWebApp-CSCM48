@@ -33,6 +33,11 @@ class PostController extends Controller
     {
         $posts = Post::latest()->paginate(10);
 
+        foreach($posts as $post)
+        {
+            views($post)->cooldown(10)->record();
+        }
+
         return view('posts.posts', [
             'posts' => $posts
         ]);
@@ -40,6 +45,8 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        views($post)->cooldown(10)->record();
+
         return view('posts.show', [
             'post' => $post
         ]);

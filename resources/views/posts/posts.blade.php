@@ -35,6 +35,7 @@
                                     {{-- // ADD A LINK TO AUTHOR AFTER IMPLEMENTING PROFILE PAGE FIX  --}}
                                     <p>Author: {{ $post->profile->name_displayed }} </p>
                                     <img class="img-fluid rounded w-50" src="{{ asset('storage/'.$post->profile->avatar) }}"/>
+                                    <p class="mt-2">Total views: {{ views($post)->count() }}</p>
                                 </div>
                                 <div class="col-md-8">
                                     <p> {{ $post->content }} </p>
