@@ -20,7 +20,7 @@
         </div>
         @if ($posts->count())
             @foreach ($posts as $post)
-                <div class="col-md-8 pt-5">
+                <div class="col-md-8 pt-4">
                     <div class="card">
                         <div class="card-header">
                             <div>
@@ -49,17 +49,16 @@
                                             {{ $tag->name }}
                                         @endforeach
                                     @endif
-
-                                    <p class="float-right"> Comments (0) </p>
+                                    <p> Comments (0) </p>
                                 </div>
-                            </div>
-                            <div class="row">
-
                             </div>
                         </div>
                     </div>
                 </div>
             @endforeach
+            <div class="pt-4 d-flex justify-content-center align-items-center">
+                {{ $posts->links() }}
+            </div>
         @else
         <p> No posts have been found! Something has gone terribly wrong in the world. </p>
         @endif
