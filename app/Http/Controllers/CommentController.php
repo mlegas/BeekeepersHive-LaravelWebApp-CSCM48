@@ -15,6 +15,47 @@ class CommentController extends Controller
         $this->middleware(['auth', 'profile.completed', 'verified']);
     }
 
+    public function destroy(Comment $comment)
+    {
+        $this->authorize('delete', $comment);
+
+        $comment->delete();
+
+        return redirect()->action([PostController::class, 'index'])->with('status', 'Comment successfully deleted!');
+    }
+
+    public function editPost(Request $request, Post $post)
+    {
+        $this->validate($request, [
+            'comment' => ['required', 'string', 'max:1500'],
+        ]);
+
+        $comment = new Comment;
+        $comment->profile_id = Auth::user()->profile->id;
+        $comment->commentable_id = $post->id;
+        $comment->commentable_type = \App\Models\Post::class;
+        $comment->content = $request->comment;
+        $comment->save();
+
+        return back()->with('status', 'Comment successfully submitted!');
+    }
+
+    public function editProfilePage(Request $request, ProfilePage $profile_page)
+    {
+        $this->validate($request, [
+            'comment' => ['required', 'string', 'max:1500'],
+        ]);
+
+        $comment = new Comment;
+        $comment->profile_id = Auth::user()->profile->id;
+        $comment->commentable_id = $profile_page->id;
+        $comment->commentable_type = \App\Models\ProfilePage::class;
+        $comment->content = $request->comment;
+        $comment->save();
+
+        return back()->with('status', 'Comment successfully submitted!');
+    }
+
     public function storePost(Request $request, Post $post)
     {
         $this->validate($request, [
@@ -32,6 +73,38 @@ class CommentController extends Controller
     }
 
     public function storeProfilePage(Request $request, ProfilePage $profile_page)
+    {
+        $this->validate($request, [
+            'comment' => ['required', 'string', 'max:1500'],
+        ]);
+
+        $comment = new Comment;
+        $comment->profile_id = Auth::user()->profile->id;
+        $comment->commentable_id = $profile_page->id;
+        $comment->commentable_type = \App\Models\ProfilePage::class;
+        $comment->content = $request->comment;
+        $comment->save();
+
+        return back()->with('status', 'Comment successfully submitted!');
+    }
+
+    public function updatePost(Request $request, Post $post)
+    {
+        $this->validate($request, [
+            'comment' => ['required', 'string', 'max:1500'],
+        ]);
+
+        $comment = new Comment;
+        $comment->profile_id = Auth::user()->profile->id;
+        $comment->commentable_id = $post->id;
+        $comment->commentable_type = \App\Models\Post::class;
+        $comment->content = $request->comment;
+        $comment->save();
+
+        return back()->with('status', 'Comment successfully submitted!');
+    }
+
+    public function updateProfilePage(Request $request, ProfilePage $profile_page)
     {
         $this->validate($request, [
             'comment' => ['required', 'string', 'max:1500'],

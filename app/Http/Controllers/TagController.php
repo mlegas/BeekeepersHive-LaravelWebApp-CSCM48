@@ -13,20 +13,6 @@ class TagController extends Controller
         $this->middleware(['auth', 'profile.completed', 'verified']);
     }
 
-    public function index()
-    {
-        $posts = Post::latest()->paginate(5);
-
-        foreach($posts as $post)
-        {
-            views($post)->cooldown(10)->record();
-        }
-
-        return view('posts.posts', [
-            'posts' => $posts
-        ]);
-    }
-
     public function show(Tag $tag)
     {
         $posts = $tag->posts;
@@ -41,5 +27,4 @@ class TagController extends Controller
             'tag' => $tag,
         ]);
     }
-    //
 }

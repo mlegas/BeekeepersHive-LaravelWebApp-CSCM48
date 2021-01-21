@@ -31,7 +31,7 @@
                             <label for="content" class="col-md-4 col-form-label text-md-right">{{ 'Content' }}</label>
 
                             <div class="col-md-6">
-                                <textarea rows="10" class="form-control @error('content') is-invalid @enderror" name="content" placeholder={{  "Write new content for htis post. Leave this field blank to use the old one." }}>{{ old('content') }}</textarea>
+                                <textarea rows="10" class="form-control @error('content') is-invalid @enderror" name="content" placeholder={{  "Write new content for this post. Leave this field blank to use the old one." }}>{{ old('content') }}</textarea>
 
                                 @error('content')
                                     <span class="invalid-feedback" role="alert">

@@ -96,6 +96,25 @@
                                         </div>
                                         <div class="col-md-8">
                                             <p> {{ $comment->content }} </p>
+
+                                            <div class="pt-4 row">
+                                                @can('edit', $comment)
+                                                <div class="col">
+                                                    <form action="{{ route('comments.edit', $comment) }}" method="get">
+                                                        <button type="submit" class="btn btn-secondary">Edit Comment</button>
+                                                    </form>
+                                                </div>
+                                                @endcan
+                                                @can('delete', $comment)
+                                                <div class="col">
+                                                    <form action="{{ route('comments.destroy', $comment) }}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete Comment</button>
+                                                    </form>
+                                                </div>
+                                                @endcan
+                                            </div>
                                         </div>
                                     @endforeach
                                 @endif
