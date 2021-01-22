@@ -88,10 +88,10 @@
                             @endif
                             @if (Route::has('logout'))
                                     <li class="nav-item">
-                                    <form action="{{ route('logout') }}" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn btn-primary"> Logout </button>
-                                    </form>
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <button type="submit" class="btn btn-primary"> Logout </button>
+                                        </form>
                                     </li>
                             @endif
                         @endguest

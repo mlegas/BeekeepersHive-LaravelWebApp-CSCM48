@@ -39,8 +39,8 @@
                                         <img class="img-fluid rounded w-50" src="{{ asset('storage/'.$post->profile->avatar) }}"/>
                                     </div>
                                     <div>
-                                    <p class="mt-2">Total views: {{ views($post)->count() }}</p>
-                                    <p>Unique views: {{ views($post)->unique()->count() }}</p>
+                                        <p class="mt-2">Total views: {{ views($post)->count() }}</p>
+                                        <p>Unique views: {{ views($post)->unique()->count() }}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-8">

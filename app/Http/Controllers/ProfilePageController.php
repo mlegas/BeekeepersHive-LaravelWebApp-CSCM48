@@ -24,6 +24,8 @@ class ProfilePageController extends Controller
 
     public function show(ProfilePage $profile_page)
     {
+        views($profile_page)->cooldown(10)->record();
+
         return view('profilepages.show', [
             'profile_page' => $profile_page
         ]);
